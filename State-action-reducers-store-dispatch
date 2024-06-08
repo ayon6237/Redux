@@ -1,0 +1,46 @@
+
+const {createStore} = require('redux');
+
+const INCREMENT = 'INCREMENT';
+
+
+//create state
+const initialState ={
+    count : 0,
+    name : "",
+    age : ""
+}
+//create action
+const reduxAction =(name,age)=>{
+    return {
+        type:INCREMENT,
+        payload:{
+            name,
+            age
+        }
+        
+    }
+}
+//create reducers
+const reduxReducers =(state=initialState,action)=>{
+    switch (action.type) {
+        case INCREMENT:
+            
+            return{
+                count :state.count+1,
+                name:action.payload.name,
+                age:action.payload.age 
+            };
+    
+        default:
+            return state;
+    }
+}
+//create store
+const store = createStore(reduxReducers);
+store.subscribe(()=>{
+    console.log(store.getState());
+})
+store.dispatch(reduxAction("Ayon",22));
+store.dispatch(reduxAction("Naim",22));
+store.dispatch(reduxAction("Shakinul",22));
